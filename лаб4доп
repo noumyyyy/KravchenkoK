@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="лаб4доп/лаб4доп.vcxproj" Id="c8d94239-58b7-4c9d-b357-9a1534a527a3" />
+</Solution>
