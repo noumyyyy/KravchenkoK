@@ -1,0 +1,55 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+int processMatrix(int* arr, int N) {
+
+    int a[20][20];
+
+    int k = 0;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            a[i][j] = arr[k++];
+        }
+    }
+
+    // ���������� ��������� �� ��������
+    for (int i = 0; i < N; i++) {
+        int j_main = i;
+        int j_sec = N - 1 - i; 
+
+        int temp = a[i][j_main];
+        a[i][j_main] = a[i][j_sec];
+        a[i][j_sec] = temp;
+    }
+
+    // ��������� ���� �������� ���� ���������
+    int sum = 0;
+    for (int i = 0; i < N; i++) {
+        sum += a[i][i];
+        sum += a[i][N - 1 - i];
+    }
+
+    return sum;
+}
+
+int main() {
+	setlocale(LC_ALL, "Ukrainian");
+    const int N = 4;
+    int arr[N * N] = {
+        7, 2, 5, 6,
+        1, 9, 8, 3,
+        4, 6, 7, 5,
+        9, 0, 7, 3
+    };
+
+    cout << "���������� ��������� �����:\n";
+    for (int i = 0; i < N * N; i++)
+        cout << arr[i] << " ";
+    cout << "\n\n";
+
+    int result = processMatrix(arr, N);
+
+    cout << "���� �������� ������� � ������ ��������� = " << result << endl;
+
+    return 0;
+}
