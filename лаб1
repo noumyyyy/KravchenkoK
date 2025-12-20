@@ -1,0 +1,81 @@
+#include <iostream>
+#include <cmath>
+#include <limits>
+#include <windows.h>
+using namespace std;
+
+int main() {
+	setlocale(LC_ALL, "Ukrainian");
+    //№1
+    cout << "1) Розміри типів\n";
+    cout << "short: " << sizeof(short) << " байт\n";
+    cout << "int: " << sizeof(int) << " байт\n";
+    cout << "long: " << sizeof(long) << " байт\n";
+    cout << "unsigned short: " << sizeof(unsigned short) << " байт\n";
+    cout << "unsigned int: " << sizeof(unsigned int) << " байт\n";
+    cout << "unsigned long: " << sizeof(unsigned long) << " байт\n";
+    cout << "unsigned long long: " << sizeof(unsigned long long) << " байт\n";
+    cout << "float: " << sizeof(float) << " байт\n";
+    cout << "double: " << sizeof(double) << " байт\n";
+    cout << "long double: " << sizeof(long double) << " байт\n";
+    cout << "char: " << sizeof(char) << " байт\n\n";
+
+	//№2
+    int a = 3, b = 4, c = 5;
+    double p = (a + b + c) / 2.0;
+    double S = std::sqrt(p * (p - a) * (p - b) * (p - c));
+
+    cout << "2) Площа трикутника\n";
+    cout << "a = " << a << ", b = " << b << ", c = " << c << "\n";
+    cout << "p = " << p << "\n";
+    cout << "Площа = " << S << "\n\n";
+
+    //№3
+    int x = 3;
+    int value = x;
+    value *= value;
+    value *= value;
+    value *= value;
+
+    cout << "3) Обчислення x^8\n";
+    cout << "x = " << x << "\n";
+    cout << "x^8 = " << value << "\n\n";
+
+	//№4
+    int A = 10, B = 20, temp;
+    cout << "4.1) Обмін через третю змінну\n";
+    cout << "До: A = " << A << ", B = " << B << "\n";
+    temp = A;
+    A = B;
+    B = temp;
+    cout << "Після: A = " << A << ", B = " << B << "\n\n";
+
+    int C = 5, D = 7;
+    cout << "4.2) Обмін без додаткової змінної\n";
+    cout << "До: C = " << C << ", D = " << D << "\n";
+    C = C + D;
+    D = C - D;
+    C = C - D;
+    cout << "Після: C = " << C << ", D = " << D << "\n\n";
+	//№5
+    unsigned long long years = 1;
+    unsigned long long seconds = 0;
+    const unsigned long long sec_per_year = 365ULL * 24ULL * 3600ULL;
+
+    cout << "5) Кількість секунд у N роках\n";
+
+    while (true) {
+        unsigned long long prev = seconds;
+        seconds = years * sec_per_year;
+
+        if (seconds < prev) {
+            cout << "\nПереповнення при кількості років = " << years << "\n";
+            break;
+        }
+
+        cout << "Роки: " << years << " -> секунд: " << seconds << "\n";
+        years *= 10;
+    }
+
+    return 0;
+}
