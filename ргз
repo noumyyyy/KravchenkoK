@@ -1,0 +1,119 @@
+#include <iostream>
+#include <iomanip>
+#include <ctime>
+#include <cstdlib>
+#include <locale>
+#include <vector>
+using namespace std;
+
+const int MAX_VALUE = 100;
+const int REPEAT = 100000; // ʲ��ʲ��� �����в� ��� ��̲�� ����
+
+//�������� ����������
+void shakerSort(int a[], int n)
+{
+    int left = 0, right = n - 1;
+    bool swapped = true;
+
+    while (swapped)
+    {
+        swapped = false;
+        for (int i = left; i < right; i++)
+            if (a[i] > a[i + 1])
+                swap(a[i], a[i + 1]), swapped = true;
+
+        right--;
+
+        for (int i = right; i > left; i--)
+            if (a[i] < a[i - 1])
+                swap(a[i], a[i - 1]), swapped = true;
+
+        left++;
+    }
+}
+
+//������� ����������
+void blockSort(int a[], int n)
+{
+    int count[MAX_VALUE + 1] = { 0 };
+
+    for (int i = 0; i < n; i++)
+        count[a[i]]++;
+
+    int k = 0;
+    for (int i = 0; i <= MAX_VALUE; i++)
+    {
+        while (count[i] > 0)
+        {
+            a[k] = i;
+            k++;
+            count[i]--;
+        }
+    }
+}
+
+//���������� ����²�
+void fillSorted(int a[], int n)
+{
+    for (int i = 0; i < n; i++)
+        a[i] = i;
+}
+
+void fillReverse(int a[], int n)
+{
+    for (int i = 0; i < n; i++)
+        a[i] = n - 1 - i;
+}
+
+void fillRandom(int a[], int n)
+{
+    for (int i = 0; i < n; i++)
+        a[i] = rand() % (MAX_VALUE + 1);
+}
+//��̲� ����
+double measure(void (*sort)(int[], int), void (*fill)(int[], int), int n)
+{
+    vector<int> a(n);
+    clock_t start = clock();
+
+    for (int i = 0; i < REPEAT; i++)
+    {
+        fill(a.data(), n);
+        sort(a.data(), n);
+    }
+
+    clock_t end = clock();
+    return double(end - start) * 1000 / CLOCKS_PER_SEC;
+}
+
+int main() {
+	setlocale(LC_ALL, "Ukrainian");
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    int sizes[] = { 5,10,15,20,25,30,35,40,45 };
+
+    cout << fixed << setprecision(3);
+    cout << "��� � �i�i�������� (��)\n\n";
+
+    auto printTable = [&](const char* title, void (*fill)(int[], int))
+        {
+            cout << title << "\n";
+            cout << setw(6) << "n"
+                << setw(18) << "��������"
+                << setw(18) << "�������\n";
+
+            for (int n : sizes)
+            {
+                cout << setw(6) << n
+                    << setw(18) << measure(shakerSort, fill, n)
+                    << setw(18) << measure(blockSort, fill, n) << "\n";
+            }
+            cout << "\n";
+        };
+
+    printTable("������������� �����", fillSorted);
+    printTable("��������� �����", fillReverse);
+    printTable("��������������� �����", fillRandom);
+
+    return 0;
+}
