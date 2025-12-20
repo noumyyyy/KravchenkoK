@@ -1,0 +1,43 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+	setlocale(LC_ALL, "Ukrainian");
+    srand(time(0));
+
+    int correct = 0;
+
+    for (int i = 1; i <= 10; i++) {
+        int a = rand() % 8 + 2;
+        int b = rand() % 8 + 2;
+
+        int answer;
+        cout << i << ") " << a << " * " << b << " = ";
+        cin >> answer;
+
+        if (!cin) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "������ ��������! ������� ���������� �� ������������.\n";
+            continue;
+        }
+
+        if (answer == a * b) correct++;
+    }
+
+    int mark;
+    switch (correct) {
+    case 10: mark = 5; break;
+    case 9:  mark = 4; break;
+    case 7:
+    case 8:  mark = 3; break;
+    default: mark = 2; break;
+    }
+
+    cout << "\n���������� ��������: " << correct << "/10\n";
+    cout << "������: " << mark << endl;
+
+    return 0;
+}
