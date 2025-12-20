@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Ukrainian");
+    string s;
+    cout << "����i�� �i���i��� ����i�: ";
+    cin >> s;
+
+    //�� ����� ���� � �������
+    for (char c : s) {
+        if (!isdigit(c)) {
+            cout << "�������: ����i�� ������� �i�� �����." << endl;
+            return 0;
+        }
+    }
+
+    int k = stoi(s);
+    if (k <= 0) {
+        cout << "�������: ����� �� ���� �i���� ����." << endl;
+        return 0;
+    }
+
+    int last = k % 10;
+    int last2 = k % 100;
+
+    string word;
+
+    switch (last) {
+    case 1:
+        if (last2 == 11) word = "����i�";
+        else word = "����";
+        break;
+    case 2:
+    case 3:
+    case 4:
+        if (last2 >= 12 && last2 <= 14) word = "����i�";
+        else word = "�����";
+        break;
+    default:
+        word = "����i�";
+    }
+
+    cout << "� ���� " << k << " " << word << endl;
+    return 0;
+}
