@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	setlocale(LC_ALL, "Ukrainian");
+    string s;
+    cout << "����i�� �����: ";
+    cin >> s;
+
+    // �������� �� ����
+    bool negative = false;
+    if (s[0] == '-') {
+        negative = true;
+        s.erase(0, 1); //�������� ����
+    }
+
+    //�������� �� �����
+    for (char c : s) {
+        if (!isdigit(c)) {
+            cout << "�������: ����i�� ���� �i�� �����!\n";
+            return 0;
+        }
+    }
+
+    //������� ����
+    int count = s.length();
+
+    //���� ����
+    int sum = 0;
+    for (char c : s) sum += (c - '0');
+
+    //������ �����
+    string reverse = string(s.rbegin(), s.rend());
+
+    cout << "\n�i���i��� ����: " << count << endl;
+    cout << "���� ����: " << sum << endl;
+    cout << "�������: " << reverse << endl;
+
+    return 0;
+}
