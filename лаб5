@@ -1,0 +1,62 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int main() {
+	setlocale(LC_ALL, "ukr");
+	int mas[] = { 10,-3,1,4,-5,2 };
+	int n = sizeof(mas) / sizeof(int);
+
+	int sum = 0, count = 0;
+	for (int i = 0; i < n; i++) {
+		if (mas[i] > 0) {
+			sum += mas[i];
+			count++;
+		}
+	}
+	double average = 0;
+	if (count > 0) average = (double)sum / count;
+
+	for (int i = 0; i < n; i++) { //������ �������������
+		if (mas[i] < 0) {
+			mas[i] = average;
+		}
+	}
+	cout << "��������� ��������� ������:\n";
+	for (int i = 0; i < n; i++) {
+		cout << mas[i] << " ";
+	}
+	srand(time(0));
+	int A[10];
+	int M = 10;
+	for (int i = 0; i < M; i++) {
+		A[i] = rand() % 21-10;
+
+	}
+	cout << "\n���������� �����:\n";
+	for (int i = 0; i < M; i++) {
+		cout << A[i] << " ";
+	}
+	
+	sum = 0, count = 0;
+	for (int i = 0; i < M; i++) {
+		if (A[i] > 0) {
+			sum += A[i];
+			count++;
+		}
+	}
+		if (count > 0) average = (double)sum / count;
+
+		for (int i = 0; i < M; i++) {
+			if (A[i] < 0) {
+				A[i] = average;
+			}
+		}
+			
+		cout << "\n��������� ����������� ������� : \n";
+		for (int i = 0; i < M; i++) {
+			cout << A[i] << " ";
+		}
+		return 0;
+}
